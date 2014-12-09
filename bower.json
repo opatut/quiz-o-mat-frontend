@@ -1,8 +1,10 @@
 {
-    "name": "package",
-    "version": "0.0.0",
-    "dependencies": {
-        "jquery2": "jquery#2.*",
-        "react": "*"
-    }
+  "name": "package",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery2": "jquery#2.*",
+    "react": "*",
+    "polymer": "~0.5.1",
+    "font-awesome": "~4.2.0"
+  }
 }
