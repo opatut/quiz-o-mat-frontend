@@ -1,0 +1,331 @@
+$questionTransitionDuration: 0.5s;
+$questionTransitionOffset1: 0.1s;
+$questionTransitionOffset2: 0.2s;
+$questionTransitionType: ease-in-out;
+
+@import 'colors';
+
+body {
+    background-color: #FFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+    // padding: 16px;
+}
+
+body, html, #wrapper {
+    height: 100%;
+}
+
+body {
+    background: #DDD;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+#wrapper {
+    background: #FFF;
+    width: 1000px;
+    margin: auto;
+    overflow: auto;
+    padding: 0 32px;
+}
+
+*:focus {
+    outline: 0;
+}
+
+.quiz-box {
+    background: $silver;
+    padding: 64px;
+}
+
+.quiz-wrapper {
+    width: 600px;
+    perspective: 600px;
+    margin: 0 auto;
+}
+
+.quiz-progress {
+    text-align: center;
+    margin: 8px auto;
+    position: relative;
+    display: flex;
+    margin: 0 -4px;
+
+    .busy-spinner {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 4px;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.3s 0.1s;
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
+
+    .group {
+        flex: 1 1;
+        padding: 0 4px;
+        background: $primaryLight;
+        margin: 0 4px;
+    }
+
+    .question {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        border: 2px solid $gray;
+        background: rgba(255, 255, 255, 0.5);
+        margin: 4px;
+
+        &.correct {
+            background: $green;
+        }
+
+        &.incorrect {
+            background: $red;
+        }
+
+        &.current {
+            background: $yellow;
+        }
+    }
+}
+
+.question-box {
+    margin: 8px 0;
+
+    .question {
+        background-color: $primaryDark;
+        color: #FFF;
+        padding: 16px;
+        font-weight: bold;
+        font-size: 1.3em;
+        line-height: 1.7em;
+        height: 200px;
+
+        overflow: hidden;
+        position: relative;
+
+        &.has-image {
+            padding-right: 200px;
+        }
+
+        .text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        &.has-image .image {
+            display: block;
+        }
+
+        .image {
+            display: none;
+
+            img {
+                position: absolute;
+                right: 16px;
+                max-height: 200px - 32px;
+                max-width: 200px - 32px;
+            }
+        }
+    }
+
+
+    .question,
+    .answer,
+    .question .image img {
+        // border-radius: 4px;
+    }
+
+    .answers {
+        display: flex;
+        flex-wrap: wrap;
+
+        .answer {
+            display: inline-block;
+            color: #FFF;
+            background-color: $primaryLight;
+            padding: 16px;
+            margin-top: 8px;
+            height: 100px;
+            flex: 1 1 45%;
+            line-height: 1.5em;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.4s;
+
+            &.a, &.c {
+                margin-right: 4px;
+            }
+
+            &.b, &.d {
+                margin-left: 4px;
+            }
+
+            &:hover {
+                background-color: lighten($primaryLight, 5%);
+            }
+
+            &.selected {
+                background-color: $yellow;
+            }
+
+            &.correct {
+                background-color: $green;
+            }
+
+            &.incorrect.selected {
+                background-color: $red;
+            }
+
+            $avatarsBackground: $primaryDark;
+
+            .avatars {
+                position: absolute;
+                background: $avatarsBackground;
+                padding: 4px;
+                top: 50%;
+                margin-top: -20px;
+                white-space: nowrap;
+                line-height: 0;
+
+                img {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-right: 4px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+
+                &:before {
+                    position: absolute;
+                    content: " ";
+                    border: 8px solid transparent;
+                    top: 50%;
+                    margin-top: -8px;
+                }
+            }
+
+            &.a .avatars, &.c .avatars {
+                right: 304px;
+
+                &:before {
+                    border-left-color: $avatarsBackground;
+                    right: -16px;
+                }
+            }
+
+            &.b .avatars, &.d .avatars {
+                left: 304px;
+
+                &:before {
+                    border-right-color: $avatarsBackground;
+                    left: -16px;
+                }
+            }
+        }
+    }
+}
+
+// Animation stuff
+.quiz-box .question-box {
+    $t: $questionTransitionDuration $questionTransitionType;
+    transition: transform $t, opacity $t;
+}
+
+.quiz-box.enter .question-box {
+    transform: translate(300px, 0);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: all 0.01s;
+}
+
+.quiz-box.exit .question-box {
+    transform: translate(-300px, 0);
+    transform: scale(1.5);
+    opacity: 0;
+}
+
+.quiz-box.result {
+    .quiz-timeout-bar {
+        transform: rotate3d(1, 0, 0, -90deg);
+        opacity: 0;
+    }
+}
+
+
+.quiz-timeout-bar {
+    height: 20px;
+    display: block;
+    background: $primaryDark;
+    padding: 4px;
+    transform-origin: 50% 0;
+    // transition: all 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transition: all 0.2s ease-in-out;
+    margin-bottom: -20px;
+
+    .progress {
+        height: 100%;
+        background: $primaryLight;
+        transition: width 0.1s linear, background 3s;
+
+        &.danger {
+            background: $red;
+        }
+    }
+}
+
+.quiz-box button.next {
+    background: $primaryDark;
+    padding: 16px;
+    font-size: 14pt;
+    color: #FFF;
+    border: 0;
+    text-transform: uppercase;
+    transition: background 0.3s;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    float: right;
+
+    transform-origin: 50% 0;
+    transform: rotate3d(1, 0, 0, -90deg);
+    opacity: 0;
+
+    i.fa {
+        margin-left: 8px;
+    }
+
+    &:hover {
+        background: $primaryLight;
+    }
+}
+
+.quiz-box.result button.next {
+    transform: none;
+    opacity: 1;
+}
+
+@media all and (min-width: 768px) {
+    @import "tablet";
+}
+
+@media all and (min-width: 960px) {
+    @import "desktop";
+}
+

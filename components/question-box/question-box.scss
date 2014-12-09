@@ -1,0 +1,14 @@
+@import '../../scss/colors';
+
+.answers {
+    margin: 4px -4px;
+}
+
+.question {
+    height: 200px;
+    box-sizing: border-box;
+    background: $primaryDark;
+    color: #FFF;
+    padding: 16px;
+    font-size: 1.5em;
+}

@@ -1,0 +1,11 @@
+<polymer-element name="quiz-progress" attributes="rounds roundIndex roundCount">
+    <template>
+        <div>
+            <link rel="stylesheet" href="quiz-progress.css">
+            <template repeat="{{ index in iterator }}">
+                <div class="round{{ roundIndex == index ? ' current' : '' }}"></div>
+            </template>
+        </div>
+    </template>
+    <script src="quiz-progress.js"></script>
+</polymer-element>

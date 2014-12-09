@@ -1,0 +1,23 @@
+<link rel="import" href="../answer-button/answer-button.html" />
+
+<polymer-element name="question-box" attributes="question quizBox">
+    <template>
+        <link rel="stylesheet" href="question-box.css">
+        <div class="question-box">
+            <div class="question">
+                {{ question.text }}
+            </div>
+            <div class="answers">
+                <div layout horizontal>
+                    <answer-button flex question="{{ question }}" quizBox="{{ quizBox }}" answer="{{ question.all_answers[0] }}"></answer-button>
+                    <answer-button flex question="{{ question }}" quizBox="{{ quizBox }}" answer="{{ question.all_answers[1] }}"></answer-button>
+                </div>
+                <div layout horizontal>
+                    <answer-button flex question="{{ question }}" quizBox="{{ quizBox }}" answer="{{ question.all_answers[2] }}"></answer-button>
+                    <answer-button flex question="{{ question }}" quizBox="{{ quizBox }}" answer="{{ question.all_answers[3] }}"></answer-button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script src="question-box.js"></script>
+</polymer-element>

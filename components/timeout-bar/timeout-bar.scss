@@ -1,0 +1,13 @@
+@import 'scss/colors';
+
+div {
+    background: $primaryDark;
+    padding: 2px;
+}
+
+span {
+    background: $primaryLight;
+    display: block;
+    height: 10px;
+    transition: width 0.1s linear;
+}

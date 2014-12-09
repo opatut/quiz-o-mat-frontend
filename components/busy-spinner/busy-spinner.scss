@@ -1,0 +1,7 @@
+.spinner {
+    transition: opacity 0.2s 0.1s;
+
+    &.hidden {
+        opacity: 0;
+    }
+}

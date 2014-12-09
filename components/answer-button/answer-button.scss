@@ -1,0 +1,24 @@
+@import '../../scss/colors';
+
+.button {
+    padding: 0 16px;
+    background: $primaryLight;
+    cursor: pointer;
+    margin: 4px;
+    color: #FFF;
+    height: 92px;
+    box-sizing: border-box;
+    text-align: center;
+
+    &:hover {
+        background: lighten($primaryLight, 20%);
+    }
+
+    &.correct {
+        background: $green;
+    }
+
+    &.selected.incorrect {
+        background: $red;
+    }
+}

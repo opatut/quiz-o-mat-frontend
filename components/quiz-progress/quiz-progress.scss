@@ -1,0 +1,18 @@
+@import '../../scss/colors';
+
+$size: 10px;
+
+.round {
+    background: $primaryDark;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    transition: transform 0.5s;
+    margin: 4px;
+
+    &.current {
+        background: $primaryLight;
+        transform: scale(1.5);
+    }
+}

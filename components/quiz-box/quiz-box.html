@@ -1,0 +1,22 @@
+<link rel="import" href="../quiz-progress/quiz-progress.html" />
+<link rel="import" href="../busy-spinner/busy-spinner.html" />
+<link rel="import" href="../question-box/question-box.html" />
+<link rel="import" href="../timeout-bar/timeout-bar.html" />
+
+<polymer-element name="quiz-box" attributes="gameId">
+    <template>
+        <link rel="stylesheet" href="quiz-box.css">
+        <div>
+            <h1>{{ game.title }}</h1>
+            <quiz-progress rounds="{{ rounds }}" roundIndex="{{ roundIndex }}" roundCount="{{ game.round_count }}"></quiz-progress>
+            <busy-spinner busy="{{ busy }}"></busy-spinner>
+            <question-box question="{{ round.question }}" quizBox="{{}}"></question-box>
+            <timeout-bar progress="0.5" id="timeout"></timeout-bar>
+
+            <button on-click="{{ prevRound }}">Previous</button>
+            <button on-click="{{ nextRound }}">Next</button>
+            {{ status }} {{ user.username }}
+        </div>
+    </template>
+    <script src="quiz-box.js"></script>
+</polymer-element>

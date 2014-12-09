@@ -1,0 +1,11 @@
+<polymer-element name="answer-button" attributes="answer quizBox question selected">
+    <template>
+        <link rel="stylesheet" href="answer-button.css">
+        <div class="button{{ question.correct_answer_id == answer.id ? ' correct' : (question.correct_answer_id != undefined ? ' incorrect' : '') }}{{ selected ? ' selected' : '' }}" layout vertical center center-justified on-click="{{ onClick }}">
+            <span class="label">
+                {{ answer.text }}
+            </span>
+        </div>
+    </template>
+    <script src="answer-button.js"></script>
+</polymer-element>
